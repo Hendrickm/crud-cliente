@@ -1,3 +1,60 @@
-<p>
-  listar-pessoa works!
-</p>
+<div class="container" style="margin-top:20px;margin-bottom:20px">
+  <section>
+      <header class="header">
+        <h2><div class="row">Lista de Pessoas</div></h2>
+      
+      </header>
+  </section>  
+
+  <section>
+    <div class="row " style="margin-bottom:20px">
+      <div class="col-md-4">
+        <label for="input-nome">Nome</label>
+        <input type="text" id="input-nome" class="form-control"/>
+      </div>
+      <div class="col-md-4">
+          <label for="input-cpf">CPF</label>
+          <input type="text" id="input-cpf" class="form-control"/>
+      </div>
+      <div class="col-md-4 d-flex align-items-end" >
+        <button type="button" class="btn btn-primary" style="margin-right:20px">Pesquisar</button>
+        <button type="button" class="btn btn-primary" routerLink="/cadastrar-pessoa">Cadastrar</button>
+      </div>
+      
+    </div>
+  </section>
+
+  <section>
+    <div class="row">
+      <table class="table">
+          <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Idade</th>
+                <th scope="col">Quantidade de Telefones</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let pessoa of pessoas">
+                <td>{{ pessoa.id }}</td>
+                <td>{{ pessoa.nome }}</td>
+                <td>{{ pessoa.email }}</td>
+                <td>{{ pessoa.cpf }}</td>
+                <td>{{ pessoa.dataNascimento}}</td>
+                <td>{{ pessoa.telefones.length }}</td>
+                <td>
+                  <button type="button" class="btn btn-info">Editar</button>
+                  <button type="button" class="btn btn-danger">Excluir</button>
+                </td>
+                
+              </tr>
+            </tbody>
+      </table>
+    </div>
+  </section>
+</div>
