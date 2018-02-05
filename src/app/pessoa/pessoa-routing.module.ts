@@ -1,0 +1,17 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { CadastrarPessoaComponent } from './cadastrar-pessoa/cadastrar-pessoa.component'
+import { ListarPessoaComponent } from './listar-pessoa/listar-pessoa.component'
+
+const routes: Routes = [
+  {path: 'pessoa', component: ListarPessoaComponent},
+  {path: 'cadastrar-pessoa', component: CadastrarPessoaComponent},
+  {path: 'editar-pessoa', component: CadastrarPessoaComponent}
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class PessoaRoutingModule { }
