@@ -17,11 +17,29 @@ export class PessoaService {
 
   constructor(private http: Http) { }
 
+  public cadastrarPesso(pessoa: Pessoa): Observable<Pessoa>{
+    return null
+  }
+
   public listarPessoas(): Observable<Pessoa[]>  {
     return this.http.get(this.urlApi)
       .map((res:Response) => res.json())
       .catch((erro:any) => Observable.throw(erro.json().error || 'Erro no Servidor'));
+  }
 
+  public buscarPessoaPorId(id: number): Observable<Pessoa>{
+
+    return null
+  }
+
+  public atualizarPessoa(pessoa: Pessoa): Observable<Pessoa>{
+
+    return null
+  }
+
+  public deletarPessoa(id: number): Observable<boolean>{
+
+    return null
   }
 
 }

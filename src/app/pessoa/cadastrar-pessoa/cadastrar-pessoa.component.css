@@ -1,0 +1,20 @@
+.row   {
+    margin-top:30px
+}
+
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+select.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+input.ng-valid.ng-touched {
+    border: 1px solid green;
+}
+
+select.ng-valid.ng-touched {
+    border: 1px solid green;
+}

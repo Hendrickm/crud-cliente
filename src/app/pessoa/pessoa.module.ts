@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http'
+import { ReactiveFormsModule } from '@angular/forms'
 
 
 import { PessoaRoutingModule } from './pessoa-routing.module';
@@ -13,6 +14,7 @@ import { IdadePipe } from './shared/idade.pipe'
     CommonModule,
     PessoaRoutingModule,
     HttpModule,
+    ReactiveFormsModule
     
   ],
   declarations: [ListarPessoaComponent, CadastrarPessoaComponent, IdadePipe]

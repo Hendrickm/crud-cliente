@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { PessoaModule } from './pessoa/pessoa.module'
@@ -14,7 +15,8 @@ import { PessoaModule } from './pessoa/pessoa.module'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    PessoaModule
+    PessoaModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

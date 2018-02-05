@@ -5,6 +5,7 @@ import { CadastrarPessoaComponent } from './cadastrar-pessoa/cadastrar-pessoa.co
 import { ListarPessoaComponent } from './listar-pessoa/listar-pessoa.component'
 
 const routes: Routes = [
+  {path: '', component: ListarPessoaComponent},
   {path: 'pessoa', component: ListarPessoaComponent},
   {path: 'cadastrar-pessoa', component: CadastrarPessoaComponent},
   {path: 'editar-pessoa', component: CadastrarPessoaComponent}

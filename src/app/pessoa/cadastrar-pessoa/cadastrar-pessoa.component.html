@@ -1,3 +1,98 @@
-<p>
-  cadastrar-pessoa works!
-</p>
+<div class="container" style="margin-top:20px">
+  <section>
+    <header class="header">
+      <h2><div class="row">Cadastrar Pessoa</div></h2>
+    
+    </header>
+  </section> 
+
+
+  <form  [formGroup]="formPessoa" (ngSubmit)="cadastrarPessoa()" novalidate>
+    <section>
+      <div class="row" >
+        <div class="col-md-5">
+          <label for="input-nome">Nome</label>
+          <input type="text" formControlName="nome" id="input-nome" class="form-control"/>
+          <small  *ngIf="!formPessoa.get('nome').valid && formPessoa.get('nome').touched" class="form-text text-danger">Campo Inválido</small>
+        </div>
+        <div class="col-md-5">
+          <label for="input-cpf">CPF</label>
+          <input type="text" formControlName="cpf" id="input-cpf" class="form-control"/>
+          <small  *ngIf="!formPessoa.get('cpf').valid && formPessoa.get('cpf').touched" class="form-text text-danger">Campo Inválido</small>
+        </div>
+      </div>
+
+      <div class="row" >
+        <div class="col-md-5">
+          <label for="input-nome">E-mail</label>
+          <input type="text" formControlName="email"  id="input-email" class="form-control"/>
+          <small  *ngIf="!formPessoa.get('email').valid && formPessoa.get('email').touched" class="form-text text-danger">Campo Inválido</small>
+
+        </div>
+        <div class="col-md-5">
+          <label for="input-data-nasc">Data de Nascimento</label>
+          <input type="text" formControlName="dataNascimento" id="input-data-nasc" class="form-control"/>
+          <small  *ngIf="!formPessoa.get('dataNascimento').valid && formPessoa.get('dataNascimento').touched" class="form-text text-danger">Campo Inválido</small>
+
+        </div>
+      </div>
+    </section>
+
+    <hr/>
+
+    <section>
+      <div class="row d-flex align-items-end">
+        <div class="col-md-1">
+          <label for="input-ddd">DDD</label>
+          <input type="text" id="input-ddd" class="form-control"/>
+        </div>
+        <div class="col-md-3">
+          <label for="input-numero">Número</label>
+          <input type="text" id="input-numero" class="form-control"/>
+        </div>
+        <div class="col-md-2 " >
+            <button type="submit" class="btn btn-info btn-lg" style="margin-right:30px" >Adicionar</button>
+        </div>
+      </div>
+
+      <div class="row">
+
+      </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th scope="col">id</th>
+                      <th scope="col">DDD</th>
+                      <th scope="col">Número</th>
+                      <th scope="col">Ações</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+            </table>
+        </div>
+      </section>
+    
+    <section>
+      <div class="row">
+        <button type="submit" class="btn btn-primary btn-lg" style="margin-right:30px"  [disabled]="!formPessoa.valid">Cadastrar</button>
+        <button type="submit" class="btn btn-secondary btn-lg">Cancelar</button>
+      </div>
+
+      
+    </section>
+
+    
+    
+    <pre>
+      {{formPessoa.value | json}}
+    </pre>
+  </form>
+</div>
+
