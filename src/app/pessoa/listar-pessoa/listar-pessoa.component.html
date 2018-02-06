@@ -15,7 +15,7 @@
         </div>
         <div class="col-md-4">
             <label for="input-cpf">CPF</label>
-            <input type="text" formControlName="cpfBusca" id="input-cpf" class="form-control"/>
+            <input type="text" formControlName="cpfBusca" id="input-cpf" class="form-control" [textMask]="{mask: maskCPF}"/>
         </div>
         <div class="col-md-4 d-flex align-items-end" >
           <button type="submit" class="btn btn-primary" style="margin-right:20px">Pesquisar</button>

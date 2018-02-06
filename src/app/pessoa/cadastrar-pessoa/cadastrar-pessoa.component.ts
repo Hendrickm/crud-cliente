@@ -94,7 +94,6 @@ export class CadastrarPessoaComponent implements OnInit {
       )
 
       this.pessoaService.atualizarPessoa(this.pessoa).subscribe()
-
     }else{   
       this.pessoa = new Pessoa(
         null,
@@ -120,8 +119,8 @@ export class CadastrarPessoaComponent implements OnInit {
   initTelefones(){
     return new FormGroup({
       id: new FormControl(null,[]),
-      ddd: new FormControl(null,[ Validators.required]),
-      numero: new FormControl(null,[ Validators.required])
+      ddd: new FormControl(null,[ Validators.required, Validators.maxLength(2)]),
+      numero: new FormControl(null,[ Validators.required, Validators.maxLength(9)])
     });
   }
 
@@ -147,7 +146,7 @@ export class CadastrarPessoaComponent implements OnInit {
     })
   }
 
-  //CONFIGURAÇÕES MYDATEPICKER
+ 
 
   
 }

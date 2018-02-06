@@ -13,6 +13,7 @@ import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@ang
 export class ListarPessoaComponent implements OnInit {
 
   public pessoas: Array<Pessoa>
+  public maskCPF = [/[0-9]/, /\d/, /\d/, '.', /[0-9]/, /\d/, /\d/ ,'.', /[0-9]/, /\d/, /\d/,'-',/[0-9]/, /\d/]
 
   public formBusca: FormGroup
 
@@ -56,8 +57,6 @@ export class ListarPessoaComponent implements OnInit {
     }else{
       this.listarPessoas()
     }
-    
-    
   }
 
   public redirecionarCadastro(){
