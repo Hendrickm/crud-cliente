@@ -7,21 +7,24 @@
   </section>  
 
   <section>
-    <div class="row">
-      <div class="col-md-4">
-        <label for="input-nome">Nome</label>
-        <input type="text" id="input-nome" class="form-control"/>
-      </div>
-      <div class="col-md-4">
-          <label for="input-cpf">CPF</label>
-          <input type="text" id="input-cpf" class="form-control"/>
-      </div>
-      <div class="col-md-4 d-flex align-items-end" >
-        <button type="button" class="btn btn-primary" style="margin-right:20px">Pesquisar</button>
-        <button type="button" class="btn btn-primary" (click)="redirecionarCadastro()">Cadastrar</button>
-      </div>
+    <form [formGroup]="formBusca" (ngSubmit)="buscarPessoas()" novalidate >
+      <div class="row">
+        <div class="col-md-4">
+          <label for="input-nome">Nome</label>
+          <input type="text" formControlName="nomeBusca" id="input-nome" class="form-control"/>
+        </div>
+        <div class="col-md-4">
+            <label for="input-cpf">CPF</label>
+            <input type="text" formControlName="cpfBusca" id="input-cpf" class="form-control"/>
+        </div>
+        <div class="col-md-4 d-flex align-items-end" >
+          <button type="submit" class="btn btn-primary" style="margin-right:20px">Pesquisar</button>
+          <button type="button" class="btn btn-primary" (click)="redirecionarCadastro()">Cadastrar</button>
+        </div>
       
-    </div>
+      
+      </div>
+    </form>
   </section>
 
   <section>
@@ -29,7 +32,7 @@
       <table class="table">
           <thead>
               <tr>
-                <th scope="col">id</th>
+                <th scope="col">ID</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Email</th>
                 <th scope="col">CPF</th>
@@ -45,7 +48,7 @@
                 <td>{{ pessoa.nome }}</td>
                 <td>{{ pessoa.email }}</td>
                 <td>{{ pessoa.cpf }}</td>
-                <td>{{ pessoa.dataNascimento | idade}}</td>
+                <td>{{ pessoa.dataNascimento | idade}} anos</td>
                 <td>{{ pessoa.telefones.length }}</td>
                 <td>
                   <button type="button" class="btn btn-info" (click)="redirecionarEdicao(pessoa)">Editar</button>

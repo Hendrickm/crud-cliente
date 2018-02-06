@@ -13,7 +13,7 @@ import { error } from 'selenium-webdriver';
 @Injectable()
 export class PessoaService {
 
-  private urlApi = 'http://127.0.0.1:8084/crudpessoa/webresources/pessoa'
+  private urlApi = 'http://localhost:8084/crudpessoa/webresources/pessoa'
 
   constructor(private http: Http) { }
 
@@ -39,8 +39,22 @@ export class PessoaService {
     
   }
 
-  public atualizarPessoa(pessoa: Pessoa): Observable<Pessoa>{
+  public buscarPessoa(nome: string, cpf: string): Observable<Pessoa[]>{
+    let query: string = "/query?"
 
+    if(nome){
+      query+="nome="+nome+"&"
+    }
+    if(cpf){
+      query+="cpf="+cpf
+    }
+
+    return this.http.get(this.urlApi+query)
+      .map((res: Response) => res.json())
+      .catch((erro: Response) => Observable.throw(erro.json().error || 'Falha no Servidor'))
+  }
+
+  public atualizarPessoa(pessoa: Pessoa): Observable<Pessoa>{
     let headers: Headers = new Headers()
     headers.append('Content-type', 'application/json')
 

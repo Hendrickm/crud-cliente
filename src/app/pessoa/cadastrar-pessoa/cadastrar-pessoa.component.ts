@@ -43,7 +43,7 @@ export class CadastrarPessoaComponent implements OnInit {
       nome: new FormControl(null , [ Validators.required]),
       email: new FormControl(null, [ Validators.required, Validators.email]),
       dataNascimento: new FormControl(null, [ Validators.required]),
-      cpf: new FormControl(null, [ Validators.required]),
+      cpf: new FormControl(null, [ Validators.required, Validators.minLength(14)]),
       telefones: new FormArray([
         this.initTelefones(), 
       ]),
