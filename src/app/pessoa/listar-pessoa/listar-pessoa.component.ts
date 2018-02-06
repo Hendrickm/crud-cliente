@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Pessoa } from '../shared/pessoa.model'
 import { PessoaService } from '../pessoa.service'
 import {ActivatedRoute, Router} from '@angular/router'
@@ -30,6 +30,7 @@ export class ListarPessoaComponent implements OnInit {
       cpfBusca: new FormControl(null)
     })
   }
+
 
 
 

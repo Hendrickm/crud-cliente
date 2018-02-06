@@ -97,7 +97,11 @@ export class CadastrarPessoaComponent implements OnInit {
         this.formPessoa.controls['telefones'].value
       )
       
-      this.pessoaService.atualizarPessoa(this.pessoa).subscribe()
+      this.pessoaService.atualizarPessoa(this.pessoa).subscribe(
+        res => {
+          this.formPessoa.reset();
+          this.router.navigate(['/pessoa'])
+        })
     }else{   
       this.pessoa = new Pessoa(
         null,
@@ -109,12 +113,13 @@ export class CadastrarPessoaComponent implements OnInit {
           
       )
 
-      this.pessoaService.cadastrarPessoa(this.pessoa).subscribe()
+      this.pessoaService.cadastrarPessoa(this.pessoa).subscribe(
+        res=>{
+        this.formPessoa.reset();
+        this.router.navigate(['/pessoa'])
+      })
     }
     
-      
-    this.formPessoa.reset();
-    this.router.navigate(['/pessoa']);
   }
 
 
