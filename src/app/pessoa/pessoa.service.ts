@@ -22,16 +22,10 @@ export class PessoaService {
 
         headers.append('Content-type', 'application/json')
 
-        return this.http.post(`${this.urlApi}/`, pessoa)
+        return this.http.post(this.urlApi+'/', pessoa)
+        .map((res:Response) => res.json())
         .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
-        /*
-        return this.http.post(
-            `${this.urlApi}/`,
-            JSON.stringify(pessoa),
-            new RequestOptions({ headers: headers })
-        )
-        .map((resposta: Response) => resposta.json() )
-  s*/
+       
     
   }
 
@@ -52,8 +46,9 @@ export class PessoaService {
   }
 
   public deletarPessoa(id: number): Observable<boolean>{
-
-    return null
+    return this.http.delete(this.urlApi+'/'+id)
+      .map((res:Response) => res.json())
+      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
 }

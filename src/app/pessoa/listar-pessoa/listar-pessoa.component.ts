@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Pessoa } from '../shared/pessoa.model'
 import { PessoaService } from '../pessoa.service'
+import {ActivatedRoute, Router} from '@angular/router'
 
 
 @Component({
@@ -13,9 +14,13 @@ export class ListarPessoaComponent implements OnInit {
 
   public pessoas: Array<Pessoa>
 
-  constructor(private pessoaService: PessoaService) { }
+  constructor(private pessoaService: PessoaService, private router: Router) { }
 
   ngOnInit() {
+    this.listarPessoas()
+  }
+
+  public listarPessoas(){
     this.pessoaService.listarPessoas().subscribe(
       pessoas => {
         this.pessoas = pessoas;
@@ -25,6 +30,17 @@ export class ListarPessoaComponent implements OnInit {
       }
  
     );
+  }
+
+
+  public deletarPessoa(id: number){
+    this.pessoaService.deletarPessoa(id)
+      .subscribe(res => {
+        this.listarPessoas();
+        this.router.navigate(['/pessoa']);
+        console.log('Pessoas Excluida');
+      })
+
   }
 
 }
