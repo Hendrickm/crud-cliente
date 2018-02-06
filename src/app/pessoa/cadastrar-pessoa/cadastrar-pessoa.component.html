@@ -40,29 +40,12 @@
 
     <hr/>
 
-    <section>
-      <div class="row d-flex align-items-end">
-        <div class="col-md-1">
-          <label for="input-ddd">DDD</label>
-          <input type="text" id="input-ddd" class="form-control"/>
-        </div>
-        <div class="col-md-3">
-          <label for="input-numero">Número</label>
-          <input type="text" id="input-numero" class="form-control"/>
-        </div>
-        <div class="col-md-2 " >
-            <button type="submit" class="btn btn-info btn-lg" style="margin-right:30px" >Adicionar</button>
-        </div>
-      </div>
-
-      <div class="row">
-
-      </div>
-    </section>
+    
 
     <section>
-        <div class="row">
-            <table class="table">
+        <div class="row" style="margin-top:0px">
+            <h3>Lista de Telefones</h3>
+            <table  class="table">
                 <thead>
                     <tr>
                       <th scope="col">id</th>
@@ -72,23 +55,32 @@
                       
                     </tr>
                   </thead>
-                  <tbody>
-
+                  <tbody  formArrayName="telefones">
+                      <tr  *ngFor="let item of formPessoa.controls.telefones.controls; let i=index"
+                        [formGroupName]="i" >
+                          <td> - </td>
+                          <td><input type='text' class="form-control" style="width:50px" formControlName="ddd"></td>
+                          <td><input type='text' class="form-control" formControlName="numero"></td>
+                          <td >
+                            <button type="button" class="btn btn-info btn-sm" (click)="adicionarTelefone()">Adicionar</button>
+                            <button type="button" class="btn btn-danger btn-sm" *ngIf="getTelefones(formPessoa).length > 1" (click)="removerTelefone(i)">Remover</button>
+                            
+                           </td>
+                      </tr>
+                              
                   </tbody>
             </table>
         </div>
       </section>
-    
+   
     <section>
-      <div class="row">
+      <div class="row" >
         <button type="submit" class="btn btn-primary btn-lg" style="margin-right:30px"  [disabled]="!formPessoa.valid">Cadastrar</button>
-        <button type="submit" class="btn btn-secondary btn-lg">Cancelar</button>
+        <button type="button" class="btn btn-secondary btn-lg" routerLink="/pessoa" >Cancelar</button>
       </div>
 
       
     </section>
-
-    
     
     <pre>
       {{formPessoa.value | json}}

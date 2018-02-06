@@ -7,7 +7,7 @@ export class Pessoa{
         public id: number,
         public nome: string,
         public cpf: string,
-        public dataNascimento: Data,
+        public dataNascimento: Date,
         public email: string,
         public telefones: Array<Telefone>){}
 }

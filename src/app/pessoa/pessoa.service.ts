@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http'
+import { Http, Response, RequestOptions, Headers } from '@angular/http'
 import { Pessoa } from './shared/pessoa.model'
 import { Observable } from 'rxjs/Observable';
 
@@ -13,12 +13,26 @@ import { error } from 'selenium-webdriver';
 @Injectable()
 export class PessoaService {
 
-  private urlApi = 'http://localhost:8084/crudpessoa/webresources/pessoa'
+  private urlApi = 'http://127.0.0.1:8084/crudpessoa/webresources/pessoa'
 
   constructor(private http: Http) { }
 
-  public cadastrarPesso(pessoa: Pessoa): Observable<Pessoa>{
-    return null
+  public cadastrarPessoa(pessoa: Pessoa): Observable<Pessoa>{
+    let headers: Headers = new Headers()
+
+        headers.append('Content-type', 'application/json')
+
+        return this.http.post(`${this.urlApi}/`, pessoa)
+        .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+        /*
+        return this.http.post(
+            `${this.urlApi}/`,
+            JSON.stringify(pessoa),
+            new RequestOptions({ headers: headers })
+        )
+        .map((resposta: Response) => resposta.json() )
+  s*/
+    
   }
 
   public listarPessoas(): Observable<Pessoa[]>  {
