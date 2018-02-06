@@ -18,7 +18,7 @@
       </div>
       <div class="col-md-4 d-flex align-items-end" >
         <button type="button" class="btn btn-primary" style="margin-right:20px">Pesquisar</button>
-        <button type="button" class="btn btn-primary" routerLink="/cadastrar-pessoa">Cadastrar</button>
+        <button type="button" class="btn btn-primary" (click)="redirecionarCadastro()">Cadastrar</button>
       </div>
       
     </div>
@@ -48,8 +48,8 @@
                 <td>{{ pessoa.dataNascimento}}</td>
                 <td>{{ pessoa.telefones.length }}</td>
                 <td>
-                  <button type="button" class="btn btn-info">Editar</button>
-                  <button type="button" class="btn btn-danger" (click)="deletarPessoa(pessoa.id)" >Excluir</button>
+                  <button type="button" class="btn btn-info" (click)="redirecionarEdicao(pessoa)">Editar</button>
+                  <button type="button" class="btn btn-danger" (click)="deletarPessoa(pessoa)" >Excluir</button>
                 </td>
                 
               </tr>

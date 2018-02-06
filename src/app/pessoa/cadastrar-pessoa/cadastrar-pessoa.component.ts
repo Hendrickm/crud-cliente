@@ -13,14 +13,28 @@ import {ActivatedRoute, Router} from '@angular/router'
 
 export class CadastrarPessoaComponent implements OnInit {
 
+  public id: number
   public pessoa: Pessoa
   public formPessoa: FormGroup
-
   
+  public acao: String = "Cadastrar"
+  public btn: String = "Cadastrar"
 
-  constructor(private pessoaService: PessoaService, private router: Router,) { }
+  private subs: any
+
+  constructor(
+              private pessoaService: PessoaService, 
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.subs = this.route.params.subscribe(params =>{
+      this.id = params['id']
+
+      this.btn = "Atualizar"
+      this.acao = "Editar"
+    })
+
     this.formPessoa = new FormGroup({
       nome: new FormControl(null , [ Validators.required]),
       email: new FormControl(null, [ Validators.required, Validators.email]),
@@ -29,27 +43,66 @@ export class CadastrarPessoaComponent implements OnInit {
       telefones: new FormArray([
         this.initTelefones(), 
       ]),
-      
     }) 
+
+    if (this.id){
+      this.pessoaService.buscarPessoaPorId(this.id).subscribe(
+        pessoa =>{
+          console.log(pessoa.telefones)
+          this.formPessoa.patchValue({
+            nome: pessoa.nome,
+            email: pessoa.email,
+            dataNascimento: pessoa.dataNascimento,
+            cpf: pessoa.cpf,
+            telefones: pessoa.telefones
+          })
+        },erro => {
+          console.log(erro);
+         }
+      )
+
+      console.log(this.formPessoa.controls.telefones)
+    }
+
+    
   }
 
   public cadastrarPessoa(){
-    this.pessoa = new Pessoa(
-      null,
-      this.formPessoa.controls['nome'].value,
-      this.formPessoa.controls['cpf'].value,
-      this.formPessoa.controls['dataNascimento'].value,
-      this.formPessoa.controls['email'].value,
-      this.formPessoa.controls['telefones'].value
-    )
 
-    this.pessoaService.cadastrarPessoa(this.pessoa)
+    if(this.id){
+      this.pessoa = new Pessoa(
+        this.id,
+        this.formPessoa.controls['nome'].value,
+        this.formPessoa.controls['cpf'].value,
+        this.formPessoa.controls['dataNascimento'].value,
+        this.formPessoa.controls['email'].value,
+        this.formPessoa.controls['telefones'].value
+      )
+
+      this.pessoaService.atualizarPessoa(this.pessoa)
       .subscribe()
+
+    }else{   
+      this.pessoa = new Pessoa(
+        null,
+        this.formPessoa.controls['nome'].value,
+        this.formPessoa.controls['cpf'].value,
+        this.formPessoa.controls['dataNascimento'].value,
+        this.formPessoa.controls['email'].value,
+        this.formPessoa.controls['telefones'].value
+          
+      )
+
+      this.pessoaService.cadastrarPessoa(this.pessoa)
+      .subscribe()
+    }
+    
       
     this.formPessoa.reset();
     this.router.navigate(['/pessoa']);
-      
   }
+
+
 
   initTelefones(){
     return new FormGroup({

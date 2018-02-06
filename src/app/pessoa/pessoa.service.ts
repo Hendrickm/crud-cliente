@@ -18,37 +18,39 @@ export class PessoaService {
   constructor(private http: Http) { }
 
   public cadastrarPessoa(pessoa: Pessoa): Observable<Pessoa>{
-    let headers: Headers = new Headers()
-
-        headers.append('Content-type', 'application/json')
-
         return this.http.post(this.urlApi+'/', pessoa)
         .map((res:Response) => res.json())
-        .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
-       
-    
+        .catch((erro: Response) => Observable.throw(erro.json().error || 'Falha no Servidor'));
   }
 
   public listarPessoas(): Observable<Pessoa[]>  {
     return this.http.get(this.urlApi)
       .map((res:Response) => res.json())
-      .catch((erro:any) => Observable.throw(erro.json().error || 'Erro no Servidor'));
+      .catch((erro: Response) => Observable.throw(erro.json().error || 'Falha no Servidor'))
   }
 
   public buscarPessoaPorId(id: number): Observable<Pessoa>{
-
-    return null
+    return this.http.get(this.urlApi + "/" + id)
+      .map((res: Response) => res.json())
+      .catch((erro: Response) => Observable.throw(erro.json().error || 'Falha no Servidor'))
+    
   }
 
   public atualizarPessoa(pessoa: Pessoa): Observable<Pessoa>{
 
-    return null
+    let headers: Headers = new Headers()
+    headers.append('Content-type', 'application/json')
+
+    return this.http.put(this.urlApi, pessoa, new RequestOptions({ headers: headers }))
+      .map((res:Response) => res.json())
+      .catch((erro:any) => Observable.throw(erro.json().error || 'Server error'));
+      
   }
 
   public deletarPessoa(id: number): Observable<boolean>{
-    return this.http.delete(this.urlApi+'/'+id)
+    return this.http.delete(this.urlApi + '/' + id)
       .map((res:Response) => res.json())
-      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+      .catch((erro: Response) => Observable.throw(erro.json().error || 'Falha no Servidor'))
   }
 
 }

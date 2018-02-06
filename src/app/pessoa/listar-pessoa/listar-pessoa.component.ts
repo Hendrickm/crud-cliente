@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
 import { Pessoa } from '../shared/pessoa.model'
 import { PessoaService } from '../pessoa.service'
 import {ActivatedRoute, Router} from '@angular/router'
@@ -20,25 +20,39 @@ export class ListarPessoaComponent implements OnInit {
     this.listarPessoas()
   }
 
+  ngOnChanges() {
+    this.listarPessoas()
+    
+  }
+
   public listarPessoas(){
     this.pessoaService.listarPessoas().subscribe(
       pessoas => {
-        this.pessoas = pessoas;
+        this.pessoas = pessoas
       },
-      err => {
-        console.log(err);
+      erro => {
+        console.log(erro)
       }
  
-    );
+    )
+  }
+
+  public redirecionarCadastro(){
+    console.log("as")
+    this.router.navigate(['/cadastrar-pessoa'])
+  }
+
+  public redirecionarEdicao(pessoa: Pessoa){
+    this.router.navigate(['/editar-pessoa/'+pessoa.id])
   }
 
 
-  public deletarPessoa(id: number){
-    this.pessoaService.deletarPessoa(id)
+  public deletarPessoa(pessoa: Pessoa){
+    this.pessoaService.deletarPessoa(pessoa.id)
       .subscribe(res => {
-        this.listarPessoas();
-        this.router.navigate(['/pessoa']);
-        console.log('Pessoas Excluida');
+        this.listarPessoas()
+        this.router.navigate(['/pessoa'])
+        console.log('Pessoas Excluida')
       })
 
   }

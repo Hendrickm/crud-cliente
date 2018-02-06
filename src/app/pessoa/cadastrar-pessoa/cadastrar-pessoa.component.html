@@ -1,7 +1,7 @@
 <div class="container" style="margin-top:20px">
   <section>
     <header class="header">
-      <h2><div class="row">Cadastrar Pessoa</div></h2>
+      <h2><div class="row">{{acao}} Pessoa</div></h2>
     
     </header>
   </section> 
@@ -75,7 +75,7 @@
    
     <section>
       <div class="row" >
-        <button type="submit" class="btn btn-primary btn-lg" style="margin-right:30px"  [disabled]="!formPessoa.valid">Cadastrar</button>
+        <button type="submit" class="btn btn-primary btn-lg" style="margin-right:30px"  [disabled]="!formPessoa.valid">{{ btn }} </button>
         <button type="button" class="btn btn-secondary btn-lg" routerLink="/pessoa" >Cancelar</button>
       </div>
 
