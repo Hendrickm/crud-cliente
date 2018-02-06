@@ -1,9 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
 import { HttpModule } from '@angular/http'
 import { ReactiveFormsModule } from '@angular/forms'
-import { MyDatePickerModule } from 'mydatepicker';
-import { TextMaskModule } from 'angular2-text-mask';
+import { MyDatePickerModule } from 'mydatepicker'
+import { TextMaskModule } from 'angular2-text-mask'
+import { LoadingModule } from 'ngx-loading';
+
 
 
 import { PessoaRoutingModule } from './pessoa-routing.module';
@@ -18,7 +20,8 @@ import { IdadePipe } from './shared/idade.pipe'
     HttpModule,
     ReactiveFormsModule,
     MyDatePickerModule,
-    TextMaskModule
+    TextMaskModule,
+    LoadingModule
   ],
   declarations: [ListarPessoaComponent, CadastrarPessoaComponent, IdadePipe]
 })

@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { PessoaModule } from './pessoa/pessoa.module';
 
+
 @NgModule({
   declarations: [
     AppComponent

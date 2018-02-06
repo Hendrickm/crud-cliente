@@ -1,4 +1,5 @@
 <div class="container" style="margin-top:20px;margin-bottom:20px">
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
   <section>
       <header class="header">
         <h2><div class="row">Lista de Pessoas</div></h2>
@@ -7,7 +8,9 @@
   </section>  
 
   <section>
-    <form [formGroup]="formBusca" (ngSubmit)="buscarPessoas()" novalidate >
+    <form [formGroup]="formBusca" (ngSubmit)="buscarPessoas()"  novalidate >
+      
+       
       <div class="row">
         <div class="col-md-4">
           <label for="input-nome">Nome</label>
@@ -28,7 +31,8 @@
   </section>
 
   <section>
-    <div class="row">
+    <div class="row" style="position:relative">
+      
       <table class="table">
           <thead>
               <tr>

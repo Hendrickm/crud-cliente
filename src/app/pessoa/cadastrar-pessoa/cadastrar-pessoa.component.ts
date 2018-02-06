@@ -27,6 +27,7 @@ export class CadastrarPessoaComponent implements OnInit {
   public myDatePickerOptions: IMyDpOptions = {dateFormat: 'dd/mm/yyyy'}
 
   private subs: any
+  public loading = false
 
   constructor(
               private fb: FormBuilder,
@@ -52,8 +53,10 @@ export class CadastrarPessoaComponent implements OnInit {
     if (this.id){
       this.btn = "Atualizar"
       this.acao = "Editar"
+      this.loading = true
       this.pessoaService.buscarPessoaPorId(this.id).subscribe(
         pessoa =>{
+          this.loading = false
           this.pessoa = pessoa
           this.formPessoa.patchValue({
             nome: pessoa.nome,
@@ -65,6 +68,7 @@ export class CadastrarPessoaComponent implements OnInit {
           this.setData()
           this.setTelefones()
         },erro => {
+          this.loading = false
           console.log(erro);
          }
       )
@@ -92,7 +96,7 @@ export class CadastrarPessoaComponent implements OnInit {
         this.formPessoa.controls['email'].value,
         this.formPessoa.controls['telefones'].value
       )
-
+      
       this.pessoaService.atualizarPessoa(this.pessoa).subscribe()
     }else{   
       this.pessoa = new Pessoa(
