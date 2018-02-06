@@ -8,7 +8,7 @@ export class IdadePipe implements PipeTransform{
     
 
     transform(dataNascimento: Date): number{
-        //let idade = 10
+        
         let date: Date = new Date(dataNascimento)
         console.log(dataNascimento)
         console.log(date)

@@ -3,7 +3,6 @@ import { Pessoa } from '../shared/pessoa.model'
 import { PessoaService } from '../pessoa.service'
 import {ActivatedRoute, Router} from '@angular/router'
 
-
 @Component({
   selector: 'app-listar-pessoa',
   templateUrl: './listar-pessoa.component.html',

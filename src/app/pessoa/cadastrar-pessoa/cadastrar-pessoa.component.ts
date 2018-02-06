@@ -18,6 +18,8 @@ export class CadastrarPessoaComponent implements OnInit {
   public pessoa: Pessoa
   public formPessoa: FormGroup
   
+  public maskCPF = [/[0-9]/, /\d/, /\d/, '.', /[0-9]/, /\d/, /\d/ ,'.', /[0-9]/, /\d/, /\d/,'-',/[0-9]/, /\d/]
+  public maskDataNascimento = [/[0-9]/, /\d/, '/', /[0-9]/, /\d/ ,'/', /[0-9]/, /\d/, /\d/,/[\d]/]
 
   public acao: String = "Cadastrar"
   public btn: String = "Cadastrar"
