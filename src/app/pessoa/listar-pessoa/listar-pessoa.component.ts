@@ -20,10 +20,7 @@ export class ListarPessoaComponent implements OnInit {
     this.listarPessoas()
   }
 
-  ngOnChanges() {
-    this.listarPessoas()
-    
-  }
+
 
   public listarPessoas(){
     this.pessoaService.listarPessoas().subscribe(

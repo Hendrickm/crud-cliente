@@ -48,17 +48,17 @@
             <table  class="table">
                 <thead>
                     <tr>
-                      <th scope="col">id</th>
                       <th scope="col">DDD</th>
                       <th scope="col">Número</th>
                       <th scope="col">Ações</th>
                       
                     </tr>
                   </thead>
+                  <!-- formPessoa.controls.telefones.controls -->
+
                   <tbody  formArrayName="telefones">
-                      <tr  *ngFor="let item of formPessoa.controls.telefones.controls; let i=index"
+                      <tr  *ngFor="let item of getTelefones(formPessoa); let i=index"
                         [formGroupName]="i" >
-                          <td> - </td>
                           <td><input type='text' class="form-control" style="width:50px" formControlName="ddd"></td>
                           <td><input type='text' class="form-control" formControlName="numero"></td>
                           <td >

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { PessoaService } from '../pessoa.service'
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { Pessoa } from '../shared/pessoa.model'
 import {ActivatedRoute, Router} from '@angular/router'
 
@@ -23,6 +23,7 @@ export class CadastrarPessoaComponent implements OnInit {
   private subs: any
 
   constructor(
+              private fb: FormBuilder,
               private pessoaService: PessoaService, 
               private router: Router,
               private route: ActivatedRoute) { }
@@ -48,6 +49,7 @@ export class CadastrarPessoaComponent implements OnInit {
     if (this.id){
       this.pessoaService.buscarPessoaPorId(this.id).subscribe(
         pessoa =>{
+          this.pessoa = pessoa
           console.log(pessoa.telefones)
           this.formPessoa.patchValue({
             nome: pessoa.nome,
@@ -56,16 +58,19 @@ export class CadastrarPessoaComponent implements OnInit {
             cpf: pessoa.cpf,
             telefones: pessoa.telefones
           })
+          this.setTelefones()
         },erro => {
           console.log(erro);
          }
       )
-
-      console.log(this.formPessoa.controls.telefones)
+      
+      console.log(<FormArray>this.formPessoa.controls['telefones'])
     }
 
     
   }
+
+  
 
   public cadastrarPessoa(){
 
@@ -79,8 +84,7 @@ export class CadastrarPessoaComponent implements OnInit {
         this.formPessoa.controls['telefones'].value
       )
 
-      this.pessoaService.atualizarPessoa(this.pessoa)
-      .subscribe()
+      this.pessoaService.atualizarPessoa(this.pessoa).subscribe()
 
     }else{   
       this.pessoa = new Pessoa(
@@ -93,8 +97,7 @@ export class CadastrarPessoaComponent implements OnInit {
           
       )
 
-      this.pessoaService.cadastrarPessoa(this.pessoa)
-      .subscribe()
+      this.pessoaService.cadastrarPessoa(this.pessoa).subscribe()
     }
     
       
@@ -106,26 +109,32 @@ export class CadastrarPessoaComponent implements OnInit {
 
   initTelefones(){
     return new FormGroup({
-      ddd : new FormControl(null,[ Validators.required]),
-      numero : new FormControl(null,[ Validators.required])
+      id: new FormControl(null,[]),
+      ddd: new FormControl(null,[ Validators.required]),
+      numero: new FormControl(null,[ Validators.required])
     });
   }
 
   adicionarTelefone(){
-    const control = <FormArray>this.formPessoa.controls['telefones'];
+    const control = <FormArray>this.formPessoa.controls['telefones']
     control.push(this.initTelefones());
   }
 
   removerTelefone(i: number){
-    const control = <FormArray>this.formPessoa.controls['telefones'];
+    const control = <FormArray>this.formPessoa.controls['telefones']
     control.removeAt(i);
   }
 
   getTelefones(formPessoa){
-    return formPessoa.get('telefones').controls;
+    return formPessoa.get('telefones').controls
   }
 
-
-  
+  setTelefones(){
+    let control = <FormArray>this.formPessoa.controls.telefones;
+    let telefones = this.pessoa.telefones.slice(1, this.pessoa.telefones.length)
+    telefones.forEach(x => {
+      control.push(this.fb.group({ddd: x.ddd,numero: x.numero}))
+    })
+  }
 
 }
