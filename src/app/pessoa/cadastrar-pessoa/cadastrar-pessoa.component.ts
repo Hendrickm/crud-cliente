@@ -3,6 +3,7 @@ import { PessoaService } from '../pessoa.service'
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { Pessoa } from '../shared/pessoa.model'
 import {ActivatedRoute, Router} from '@angular/router'
+import {IMyDpOptions} from 'mydatepicker';
 
 @Component({
   selector: 'app-cadastrar-pessoa',
@@ -17,8 +18,11 @@ export class CadastrarPessoaComponent implements OnInit {
   public pessoa: Pessoa
   public formPessoa: FormGroup
   
+
   public acao: String = "Cadastrar"
   public btn: String = "Cadastrar"
+
+  public myDatePickerOptions: IMyDpOptions = {dateFormat: 'dd/mm/yyyy'}
 
   private subs: any
 
@@ -31,9 +35,6 @@ export class CadastrarPessoaComponent implements OnInit {
   ngOnInit() {
     this.subs = this.route.params.subscribe(params =>{
       this.id = params['id']
-
-      this.btn = "Atualizar"
-      this.acao = "Editar"
     })
 
     this.formPessoa = new FormGroup({
@@ -47,10 +48,11 @@ export class CadastrarPessoaComponent implements OnInit {
     }) 
 
     if (this.id){
+      this.btn = "Atualizar"
+      this.acao = "Editar"
       this.pessoaService.buscarPessoaPorId(this.id).subscribe(
         pessoa =>{
           this.pessoa = pessoa
-          console.log(pessoa.telefones)
           this.formPessoa.patchValue({
             nome: pessoa.nome,
             email: pessoa.email,
@@ -58,6 +60,7 @@ export class CadastrarPessoaComponent implements OnInit {
             cpf: pessoa.cpf,
             telefones: pessoa.telefones
           })
+          this.setData()
           this.setTelefones()
         },erro => {
           console.log(erro);
@@ -70,7 +73,11 @@ export class CadastrarPessoaComponent implements OnInit {
     
   }
 
-  
+  public setData(){
+    this.formPessoa.patchValue({dataNascimento: {
+      date:  this.pessoa.dataNascimento
+      }});
+  }
 
   public cadastrarPessoa(){
 
@@ -79,7 +86,7 @@ export class CadastrarPessoaComponent implements OnInit {
         this.id,
         this.formPessoa.controls['nome'].value,
         this.formPessoa.controls['cpf'].value,
-        this.formPessoa.controls['dataNascimento'].value,
+        this.formPessoa.controls['dataNascimento'].value.jsdate,
         this.formPessoa.controls['email'].value,
         this.formPessoa.controls['telefones'].value
       )
@@ -91,7 +98,7 @@ export class CadastrarPessoaComponent implements OnInit {
         null,
         this.formPessoa.controls['nome'].value,
         this.formPessoa.controls['cpf'].value,
-        this.formPessoa.controls['dataNascimento'].value,
+        this.formPessoa.controls['dataNascimento'].value.jsdate,
         this.formPessoa.controls['email'].value,
         this.formPessoa.controls['telefones'].value
           
@@ -106,6 +113,7 @@ export class CadastrarPessoaComponent implements OnInit {
   }
 
 
+  //FUNÇÕES DO ARRAYFORM DE TELEFONES
 
   initTelefones(){
     return new FormGroup({
@@ -132,9 +140,12 @@ export class CadastrarPessoaComponent implements OnInit {
   setTelefones(){
     let control = <FormArray>this.formPessoa.controls.telefones;
     let telefones = this.pessoa.telefones.slice(1, this.pessoa.telefones.length)
-    telefones.forEach(x => {
-      control.push(this.fb.group({ddd: x.ddd,numero: x.numero}))
+    telefones.forEach(tel => {
+      control.push(this.fb.group({id:tel.id, ddd: tel.ddd,numero: tel.numero}))
     })
   }
 
+  //CONFIGURAÇÕES MYDATEPICKER
+
+  
 }

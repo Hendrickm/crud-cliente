@@ -18,9 +18,12 @@ export class PessoaService {
   constructor(private http: Http) { }
 
   public cadastrarPessoa(pessoa: Pessoa): Observable<Pessoa>{
-        return this.http.post(this.urlApi+'/', pessoa)
-        .map((res:Response) => res.json())
-        .catch((erro: Response) => Observable.throw(erro.json().error || 'Falha no Servidor'));
+    let headers: Headers = new Headers()
+    headers.append('Content-type', 'application/json')
+
+    return this.http.post(this.urlApi+'/', pessoa)
+      .map((res:Response) => res.json(), new RequestOptions({ headers: headers }))
+      .catch((erro: Response) => Observable.throw(erro.json().error || 'Falha no Servidor'));
   }
 
   public listarPessoas(): Observable<Pessoa[]>  {

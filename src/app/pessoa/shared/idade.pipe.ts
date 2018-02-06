@@ -7,15 +7,15 @@ export class IdadePipe implements PipeTransform{
 
     
 
-    transform(dataNascimento: string): number{
+    transform(dataNascimento: Date): number{
         //let idade = 10
         let date: Date = new Date(dataNascimento)
         console.log(dataNascimento)
-        console.log(date.getFullYear())
-        
-        var ageDifMs = Date.now() - date.getTime();
-        var ageDate = new Date(ageDifMs); // miliseconds from epoch
+        console.log(date)
+        let ageDifMs = Date.now() - date.getTime()
+        let ageDate = new Date(ageDifMs);
         return Math.abs(ageDate.getUTCFullYear() - 1970);
+       
         
         
     }

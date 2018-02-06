@@ -17,7 +17,7 @@
         </div>
         <div class="col-md-5">
           <label for="input-cpf">CPF</label>
-          <input type="text" formControlName="cpf" id="input-cpf" class="form-control"/>
+          <input type="text" formControlName="cpf" id="input-cpf" class="form-control" />
           <small  *ngIf="!formPessoa.get('cpf').valid && formPessoa.get('cpf').touched" class="form-text text-danger">Campo Inválido</small>
         </div>
       </div>
@@ -30,9 +30,12 @@
 
         </div>
         <div class="col-md-5">
+          
           <label for="input-data-nasc">Data de Nascimento</label>
-          <input type="text" formControlName="dataNascimento" id="input-data-nasc" class="form-control"/>
+          <my-date-picker name="mydate" [options]="myDatePickerOptions" formControlName="dataNascimento"></my-date-picker>
           <small  *ngIf="!formPessoa.get('dataNascimento').valid && formPessoa.get('dataNascimento').touched" class="form-text text-danger">Campo Inválido</small>
+
+
 
         </div>
       </div>
@@ -48,6 +51,7 @@
             <table  class="table">
                 <thead>
                     <tr>
+                      <th>id</th>
                       <th scope="col">DDD</th>
                       <th scope="col">Número</th>
                       <th scope="col">Ações</th>
@@ -59,15 +63,16 @@
                   <tbody  formArrayName="telefones">
                       <tr  *ngFor="let item of getTelefones(formPessoa); let i=index"
                         [formGroupName]="i" >
+                          <td><input type='text'  style="border:none; background:none; width:30px" placeholder="-" readonly formControlName="id"></td>
                           <td><input type='text' class="form-control" style="width:50px" formControlName="ddd"></td>
                           <td><input type='text' class="form-control" formControlName="numero"></td>
                           <td >
-                            <button type="button" class="btn btn-info btn-sm" (click)="adicionarTelefone()">Adicionar</button>
+                            
                             <button type="button" class="btn btn-danger btn-sm" *ngIf="getTelefones(formPessoa).length > 1" (click)="removerTelefone(i)">Remover</button>
                             
                            </td>
                       </tr>
-                              
+                      <button type="button" class="btn btn-info btn-sm" (click)="adicionarTelefone()">Adicionar</button>   
                   </tbody>
             </table>
         </div>

@@ -45,7 +45,7 @@
                 <td>{{ pessoa.nome }}</td>
                 <td>{{ pessoa.email }}</td>
                 <td>{{ pessoa.cpf }}</td>
-                <td>{{ pessoa.dataNascimento}}</td>
+                <td>{{ pessoa.dataNascimento | idade}}</td>
                 <td>{{ pessoa.telefones.length }}</td>
                 <td>
                   <button type="button" class="btn btn-info" (click)="redirecionarEdicao(pessoa)">Editar</button>

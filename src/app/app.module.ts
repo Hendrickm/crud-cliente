@@ -2,11 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { ReactiveFormsModule } from '@angular/forms'
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { PessoaModule } from './pessoa/pessoa.module'
-
+import { PessoaModule } from './pessoa/pessoa.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +14,10 @@ import { PessoaModule } from './pessoa/pessoa.module'
     BrowserModule,
     AppRoutingModule,
     PessoaModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PessoaModule
+
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
