@@ -15,6 +15,7 @@ Executar `ng serve` para ativar servidor de desenvolvimento. Para visualizar o a
 
 ## Desenvolvido com
 
-*[Angular 4](https://angular.io)
-*[Bootstrap](https://getbootstrap.com)
+[Angular 4](https://angular.io) 
+
+[Bootstrap](https://getbootstrap.com)
 
