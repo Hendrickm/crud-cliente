@@ -56,16 +56,21 @@ export class CadastrarPessoaComponent implements OnInit {
       this.loading = true
       this.pessoaService.buscarPessoaPorId(this.id).subscribe(
         pessoa =>{
+          this.pessoa = pessoa
+          console.log(pessoa.dataNascimento)
           this.loading = false
           this.pessoa = pessoa
           this.formPessoa.patchValue({
             nome: pessoa.nome,
             email: pessoa.email,
-            dataNascimento: pessoa.dataNascimento,
+            dataNascimento: {
+              date:  pessoa.dataNascimento,
+              jsdate: pessoa.dataNascimento
+              },
             cpf: pessoa.cpf,
             telefones: pessoa.telefones
           })
-          this.setData()
+          console.log()
           this.setTelefones()
         },erro => {
           this.loading = false
@@ -73,21 +78,17 @@ export class CadastrarPessoaComponent implements OnInit {
          }
       )
       
-      console.log(<FormArray>this.formPessoa.controls['telefones'])
     }
 
     
   }
 
-  public setData(){
-    this.formPessoa.patchValue({dataNascimento: {
-      date:  this.pessoa.dataNascimento
-      }});
-  }
+ 
 
   public cadastrarPessoa(){
 
     if(this.id){
+      console.log(this.formPessoa.controls['telefones'].value)
       this.pessoa = new Pessoa(
         this.id,
         this.formPessoa.controls['nome'].value,
